@@ -50,6 +50,9 @@ class BaseModel:
     def to_dict(self):
         """
         Method to_dict for back a dictionary with all key and values
+        
+        Returns:
+            dict: new dictionary
         """
         new_dict = {}
         for key, value in self.__dict__.items():

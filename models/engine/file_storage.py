@@ -18,6 +18,9 @@ class FileStorage:
     def all(self):
         """
         Method for return the dictionary of the private instance object
+
+        Returns:
+            obj: objects dictionary
         """
         return self.__objects
 
@@ -25,6 +28,9 @@ class FileStorage:
         """
         Method to set in the private instance __object, the key obj
         have the value class name and id
+
+        Args:
+            obj (object): key object
         """
         self.__objects[obj.__class__.__name__ + "." + obj.id] = obj
 
