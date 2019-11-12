@@ -12,7 +12,7 @@ class HBNBCommand(cmd.Cmd):
     class command
     """
     intro = ''
-    prompt = '(hbnb)'
+    prompt = '(hbnb) '
 
     def do_quit(self, argv):
         """Quit command to exit the program"""
