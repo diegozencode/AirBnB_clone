@@ -1,52 +1,52 @@
 #!/usr/bin/python3
-
 """
 File Storage Module
 """
-
-import models.base_model import BaseModel
+from models.base_model import BaseModel
 import json
+import os
+
 
 class FileStorage:
     """
     Class File Storage
     """
-
-    def __init__(self):
-        """
-        Method Init for constructor class File Storage
-        """
-        self.__file_path = file.json
-        self.__object = {}
+    __file_path = 'file.json'
+    __objects = {}
 
     def all(self):
         """
         Method for return the dictionary of the private instance object
         """
-        return self.__object
+        return self.__objects
 
     def new(self, obj):
         """
         Method to set in the private instance __object, the key obj
         have the value class name and id
         """
-        self.__object[self.__class__.__name__ + "." + obj.id] = obj
+        self.__objects[obj.__class__.__name__ + "." + obj.id] = obj
 
     def save(self):
         """
         Method for serializes __object to the JSON file
         """
         new_dic = {}
-        for key, value in self.__object.item():
-            new_dic[key] = value.to_dic()
+        for key, value in self.__objects.items():
+            new_dic[key] = value.to_dict()
 
         with open(self.__file_path, "w", encoding='utf-8') as f:
-            return(f.write(json.dumps(new_dic))
+            json.dump(new_dic, f)
 
     def reload(self):
         """
         Method for deserializes to JSON file __object
-        if the file exist, if not exist, does nothing
         """
-        with open(self.__file_path, mode="r", encoding='utf-8') as f:
-            return(json.load(f))
+        exists = os.path.isfile(self.__file_path)
+        if exists:
+            with open(self.__file_path, mode="r", encoding='utf-8') as f:
+                data_load = json.load(f)
+            for dic in data_load.values():
+                my_new_class = dic["__class__"]
+                del dic["__class__"]
+                self.new(eval(my_new_class)(**dic))
