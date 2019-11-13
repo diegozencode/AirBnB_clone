@@ -1,13 +1,12 @@
 #!/usr/bin/python3
-
 """
 Module Console
 """
-
 import cmd
 from models.base_model import BaseModel
 import models
 from models.user import User
+
 
 class HBNBCommand(cmd.Cmd):
     """
@@ -84,7 +83,7 @@ class HBNBCommand(cmd.Cmd):
         if len(my_list) is 0:
             print("** class name missing **")
             return False
-                    
+
         if my_list[0] in self.my_classes:
             if len(my_list) > 1:
                 key = my_list[0] + "." + my_list[1]
