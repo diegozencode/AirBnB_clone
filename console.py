@@ -97,7 +97,19 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** class doesn't exist **")
 
-
+    def do_all(self, args):
+        """Prints all registers"""
+        my_classes = ["BaseModel"]
+        my_list = args.split()
+        my_all = []
+        if len(my_list) == 0 or my_list[0] in my_classes:
+            my_dict = models.storage.all()
+            for i in my_dict.keys():
+                obj = my_dict[i]
+                my_list.append(str(obj))
+            print(my_list)
+        else:
+            print("** class doesn't exist **\n")
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
