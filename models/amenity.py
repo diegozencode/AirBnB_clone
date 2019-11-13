@@ -1,22 +1,19 @@
 #!/usr/bin/python3
-
 """
-Amenty Module
+    Amenity Module
 """
-
 from models.base_model import BaseModel
 
 
-class Amenty(BaseModel):
-    """
-    Class Amenty
+class Amenity(BaseModel):
+    """Class Amenty
+
+    Attributes:
+        name (str): empty string
     """
 
     name = ''
 
-
     def __init__(self, *args, **kwargs):
-        """
-        Method for initialize for Amenity Class
-        """
+        """ Method for initialize for Amenity Class"""
         super().__init__(*args, **kwargs)
