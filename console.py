@@ -17,6 +17,7 @@ class HBNBCommand(cmd.Cmd):
     sp = "=======================================\n"
     intro = "{}{}type help or ? to list commands. \n".format(msg, sp)
     prompt = "(hbnb) "
+    my_classes = ["BaseModel"]
 
     def do_quit(self, args):
         """ quit command to exit the program """
@@ -60,12 +61,12 @@ class HBNBCommand(cmd.Cmd):
 
     def do_show(self, args):
         """ print the string representation of an instance """
-        my_classes = ["BaseModel"]
+        # my_classes = ["BaseModel"]
         if args == "":
             print("** class name missing **\n")
         else:
             my_list = args.split()
-            if my_list[0] not in my_classes:
+            if my_list[0] not in self.my_classes:
                 print("** class doesn't exist **\n")
             else:
                 if len(my_list) == 1:
@@ -84,14 +85,14 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return False
                     
-        if my_list[0] in __class__:
-            if my_list > 1:
+        if my_list[0] in self.my_classes:
+            if len(my_list) > 1:
                 key = my_list[0] + "." + my_list[1]
-                if key in my_list:
-                    del model.storage.all()[key]
+                if key in models.storage.all().keys():
+                    del models.storage.all()[key]
                     models.storage.save()
                 else:
-                    print("** instance id missing **")
+                    print("** no instance found **")
             else:
                 print("** instance id missing **")
         else:
@@ -99,10 +100,10 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, args):
         """Prints all registers"""
-        my_classes = ["BaseModel"]
+        # my_classes = ["BaseModel"]
         my_list = args.split()
         my_all = []
-        if len(my_list) == 0 or my_list[0] in my_classes:
+        if len(my_list) == 0 or my_list[0] in self.my_classes:
             my_dict = models.storage.all()
             for i in my_dict.keys():
                 obj = my_dict[i]
@@ -112,34 +113,32 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **\n")
 
     def do_update(self, args):
-        """"""
-        my_list = args.split()
-        my_key = "{}.{}".format(my_list[0], my_list[1])
-        my_obj = models.storage.all()
-
-        if len(my_list) is 0:
-            print("** class name missing **")
-            return False
-            
-        if len(my_list) < 1:
-            print("** class doesn't exist **")
-            return False
-
-        if len(my_list) < 2:
-            print("** instance id missing **")
-            return False
-
-        if my_key not in my_obj.keys():
-            print("** no instance found **")
-            return False
-
-        if len(my_list) < 3:
-            print("** attribute name missing **")
-            return False
-
-        if len(my_list) < 4:
-            print("** value missing **")
-            return False
+        """Update data"""
+        # my_classes = ["BaseModel"]
+        if args == "":
+            print("** class name missing **\n")
+        else:
+            my_list = args.split()
+            if my_list[0] in self.my_classes:
+                if len(my_list) > 1:
+                    key = my_list[0] + "." + my_list[1]
+                    my_dict = models.storage.all()
+                    if key in my_dict.keys():
+                        if len(my_list) > 2:
+                            if len(my_list) > 3:
+                                new_str = my_list[3].strip('\"')
+                                setattr(my_dict[key], my_list[2], new_str)
+                                models.storage.save()
+                            else:
+                                print("** value missing **\n")
+                        else:
+                            print("** attribute name missing **\n")
+                    else:
+                        print("** no instance found **\n")
+                else:
+                    print("** instance id missing **\n")
+            else:
+                print("** class doesn't exist **\n")
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
