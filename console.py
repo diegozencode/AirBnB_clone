@@ -84,7 +84,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return False
                     
-        if my_list[0] in classes:
+        if my_list[0] in __class__:
             if my_list > 1:
                 key = my_list[0] + "." + my_list[1]
                 if key in my_list:
