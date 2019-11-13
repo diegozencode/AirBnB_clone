@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Base Model Module
+    Base Model Module
 """
 import uuid
 from datetime import datetime
@@ -8,13 +8,14 @@ import models
 
 
 class BaseModel:
-    """
-    Class Base Model
-    """
+    """Base Model for other classes"""
 
     def __init__(self, *args, **kwargs):
-        """
-        Method Init Constructor
+        """Init Constructor
+
+        Args:
+            *args: not used
+            **kwargs (dict): attributes
         """
         if kwargs is not None and len(kwargs) > 0:
             for key, value in kwargs.items():
@@ -32,8 +33,10 @@ class BaseModel:
             models.storage.new(self)
 
     def __str__(self):
-        """
-        Method str for print de class name, id and dictionary
+        """Method str for print de class name, id and dictionary
+
+        Returns:
+            string representation
         """
         i = self.id
         cl = self.__class__.__name__
@@ -41,16 +44,13 @@ class BaseModel:
         return '[' + cl + '] (' + i + ') ' + d
 
     def save(self):
-        """
-        Method save for update the attribute with public instance
-        """
+        """Save the attributes values"""
         self.updated_at = datetime.now()
         models.storage.save()
 
     def to_dict(self):
-        """
-        Method to_dict for back a dictionary with all key and values
-        
+        """Method for back a dictionary with all key and values
+
         Returns:
             dict: new dictionary
         """
