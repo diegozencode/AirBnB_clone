@@ -10,7 +10,6 @@ from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
 import json
-import os
 
 
 class FileStorage:
@@ -55,11 +54,12 @@ class FileStorage:
         """
         Method for deserializes to JSON file __object
         """
-        exists = os.path.isfile(self.__file_path)
-        if exists:
+        try:
             with open(self.__file_path, mode="r", encoding='utf-8') as f:
-                data_load = json.load(f)
+                data_load = json.loads(f)
             for dic in data_load.values():
                 my_new_class = dic["__class__"]
                 del dic["__class__"]
                 self.new(eval(my_new_class)(**dic))
+        except FileNotFoundError:
+            pass
