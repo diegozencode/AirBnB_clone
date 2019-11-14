@@ -33,11 +33,11 @@ class TestBaseModel(unittest.TestCase):
         test_model.my_number = 89
         a = test_model.to_dict()
         exp_att = ["id",
-                          "created_at",
-                          "updated_at",
-                          "name",
-                          "my_number",
-                          "__class__"]
+                   "created_at",
+                   "updated_at",
+                   "name",
+                   "my_number",
+                   "__class__"]
         self.assertCountEqual(a.keys(), exp_att)
         self.assertEqual(a['__class__'], 'BaseModel')
         self.assertEqual(a['name'], "AirBnBclone")
