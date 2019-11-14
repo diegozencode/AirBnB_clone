@@ -20,7 +20,8 @@ class HBNBCommand(cmd.Cmd):
         my_classes (obj:list of str): classes options
     """
     prompt = "(hbnb) "
-    my_classes = ["BaseModel", "User", "State", "City", "Amenity", "Place", "Review"]
+    my_classes = ["BaseModel", "User", "State", "City",
+                  "Amenity", "Place", "Review"]
 
     def do_quit(self, args):
         """ quit command to exit the program """
