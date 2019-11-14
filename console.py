@@ -17,14 +17,8 @@ class HBNBCommand(cmd.Cmd):
     """Class command
 
     Attributes:
-        msg (str): console welcome message
-        sp (str): separator text
-        intro (str): helpful welcome message
         my_classes (obj:list of str): classes options
     """
-    msg = "Welcome to the AirBnB Clone Interpreter\n"
-    sp = "=======================================\n"
-    intro = "{}{}type help or ? to list commands. \n".format(msg, sp)
     prompt = "(hbnb) "
     my_classes = ["BaseModel", "User", "State", "City", "Amenity", "Place", "Review"]
 
@@ -77,7 +71,7 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
             else:
                 if len(my_list) == 1:
-                    print("** instance id is missing **")
+                    print("** instance id missing **")
                 else:
                     myobj = "{}.{}".format(my_list[0], my_list[1])
                     if myobj in models.storage.all().keys():
