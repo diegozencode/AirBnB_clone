@@ -26,7 +26,7 @@ class HBNBCommand(cmd.Cmd):
     sp = "=======================================\n"
     intro = "{}{}type help or ? to list commands. \n".format(msg, sp)
     prompt = "(hbnb) "
-    my_classes = ["BaseModel"]
+    my_classes = ["BaseModel", "User", "State", "City", "Amenity", "Place", "Review"]
 
     def do_quit(self, args):
         """ quit command to exit the program """
