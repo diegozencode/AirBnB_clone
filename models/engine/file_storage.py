@@ -55,7 +55,7 @@ class FileStorage:
         """
         try:
             with open(self.__file_path, mode="r", encoding='utf-8') as f:
-                data_load = json.loads(f)
+                data_load = json.load(f)
             for dic in data_load.values():
                 my_new_class = dic["__class__"]
                 del dic["__class__"]
