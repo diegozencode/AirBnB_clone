@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-    Unit test base model
+    Unit test amenity model
 """
 import unittest
 from models.amenity import Amenity
